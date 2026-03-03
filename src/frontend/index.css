@@ -1,0 +1,528 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Mona Sans ─── */
+@font-face {
+  font-family: "Mona Sans";
+  src: url("/assets/fonts/MonaSans.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ─── General Sans ─── */
+@font-face {
+  font-family: "General Sans";
+  src: url("/assets/fonts/GeneralSans.woff2") format("woff2");
+  font-weight: 200 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ─── Cabinet Grotesk (fallback display) ─── */
+@font-face {
+  font-family: "Cabinet Grotesk";
+  src: url("/assets/fonts/CabinetGrotesk.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+
+    /* PICL OKLCH tokens — dark theme as default */
+    --background: 0.10 0.02 260;
+    --foreground: 0.96 0.01 240;
+
+    --card: 0.13 0.025 260;
+    --card-foreground: 0.96 0.01 240;
+
+    --popover: 0.15 0.02 260;
+    --popover-foreground: 0.96 0.01 240;
+
+    /* Electric blue primary */
+    --primary: 0.60 0.20 255;
+    --primary-foreground: 0.98 0 0;
+
+    /* Gold accent */
+    --gold: 0.78 0.16 70;
+
+    /* Secondary / slate */
+    --secondary: 0.18 0.025 255;
+    --secondary-foreground: 0.90 0.01 240;
+
+    --muted: 0.17 0.02 260;
+    --muted-foreground: 0.60 0.02 255;
+
+    --accent: 0.22 0.04 255;
+    --accent-foreground: 0.96 0.01 240;
+
+    --destructive: 0.577 0.245 27.325;
+    --destructive-foreground: 0.985 0 0;
+
+    --border: 0.25 0.03 255;
+    --input: 0.22 0.03 255;
+    --ring: 0.60 0.20 255;
+
+    --chart-1: 0.60 0.20 255;
+    --chart-2: 0.78 0.16 70;
+    --chart-3: 0.70 0.15 200;
+    --chart-4: 0.65 0.18 160;
+    --chart-5: 0.80 0.12 30;
+
+    --sidebar: 0.12 0.025 260;
+    --sidebar-foreground: 0.96 0.01 240;
+    --sidebar-primary: 0.60 0.20 255;
+    --sidebar-primary-foreground: 0.985 0 0;
+    --sidebar-accent: 0.18 0.025 255;
+    --sidebar-accent-foreground: 0.96 0.01 240;
+    --sidebar-border: 0.25 0.03 255;
+    --sidebar-ring: 0.60 0.20 255;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    color-scheme: dark;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "General Sans", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Mona Sans", "Cabinet Grotesk", system-ui, sans-serif;
+  }
+}
+
+/* ─── ANIMATIONS ─── */
+
+/* Marquee — left scroll */
+@keyframes marquee-left {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Marquee — right scroll */
+@keyframes marquee-right {
+  0%   { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+/* Floating orbs */
+@keyframes orb-float-1 {
+  0%   { transform: translate(0, 0) scale(1); }
+  33%  { transform: translate(40px, -60px) scale(1.15); }
+  66%  { transform: translate(-30px, 40px) scale(0.9); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
+@keyframes orb-float-2 {
+  0%   { transform: translate(0, 0) scale(1); }
+  40%  { transform: translate(-50px, 30px) scale(1.2); }
+  70%  { transform: translate(30px, -40px) scale(0.85); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
+@keyframes orb-float-3 {
+  0%   { transform: translate(0, 0) scale(1); }
+  50%  { transform: translate(60px, 50px) scale(1.1); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
+/* Shimmer sweep */
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+/* Fade-up entrance */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Pulse glow */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px 0 oklch(0.60 0.20 255 / 0.3); }
+  50%        { box-shadow: 0 0 40px 8px oklch(0.60 0.20 255 / 0.55); }
+}
+
+/* Rotate slow (progress ring) */
+@keyframes rotate-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Grid line drift */
+@keyframes grid-drift {
+  0%   { background-position: 0 0; }
+  100% { background-position: 60px 60px; }
+}
+
+/* Scroll indicator bounce */
+@keyframes bounce-down {
+  0%, 100% { transform: translateY(0); opacity: 0.5; }
+  50%       { transform: translateY(8px); opacity: 1; }
+}
+
+/* ─── UTILITY CLASSES ─── */
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+}
+
+.marquee-left .marquee-track {
+  animation: marquee-left 28s linear infinite;
+}
+
+.marquee-right .marquee-track {
+  animation: marquee-right 32s linear infinite;
+}
+
+.marquee-ticker .marquee-track {
+  animation: marquee-left 18s linear infinite;
+}
+
+.marquee-left:hover .marquee-track,
+.marquee-right:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+.shimmer-text {
+  background: linear-gradient(
+    90deg,
+    oklch(0.70 0.20 255) 0%,
+    oklch(0.95 0.01 240) 30%,
+    oklch(0.78 0.16 70) 50%,
+    oklch(0.95 0.01 240) 70%,
+    oklch(0.70 0.20 255) 100%
+  );
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 4s linear infinite;
+}
+
+.glass-card {
+  background: oklch(0.18 0.025 255 / 0.55);
+  border: 1px solid oklch(0.35 0.04 255 / 0.5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.glass-card-hover {
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.glass-card-hover:hover {
+  border-color: oklch(0.60 0.20 255 / 0.6);
+  box-shadow: 0 0 30px oklch(0.60 0.20 255 / 0.15), 0 8px 32px oklch(0 0 0 / 0.4);
+  transform: translateY(-4px);
+}
+
+.glow-blue {
+  box-shadow: 0 0 20px oklch(0.60 0.20 255 / 0.4), 0 4px 20px oklch(0 0 0 / 0.3);
+}
+
+.glow-blue-hover {
+  transition: box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.glow-blue-hover:hover {
+  box-shadow: 0 0 35px oklch(0.60 0.20 255 / 0.7), 0 4px 24px oklch(0 0 0 / 0.4);
+}
+
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.scroll-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.orb-1 {
+  animation: orb-float-1 12s ease-in-out infinite;
+}
+.orb-2 {
+  animation: orb-float-2 9s ease-in-out infinite;
+}
+.orb-3 {
+  animation: orb-float-3 14s ease-in-out infinite;
+}
+
+.hero-grid {
+  background-image: 
+    linear-gradient(oklch(0.60 0.20 255 / 0.04) 1px, transparent 1px),
+    linear-gradient(to right, oklch(0.60 0.20 255 / 0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+  animation: grid-drift 15s linear infinite;
+}
+
+.nav-compact {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+/* Float label */
+.float-label-wrapper {
+  position: relative;
+}
+
+.float-label-wrapper input,
+.float-label-wrapper textarea {
+  padding-top: 1.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.float-label-wrapper label {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  font-size: 0.875rem;
+  color: oklch(0.60 0.02 255);
+  pointer-events: none;
+  transition: top 0.2s ease, font-size 0.2s ease, color 0.2s ease;
+}
+
+.float-label-wrapper input:focus ~ label,
+.float-label-wrapper input:not(:placeholder-shown) ~ label,
+.float-label-wrapper textarea:focus ~ label,
+.float-label-wrapper textarea:not(:placeholder-shown) ~ label {
+  top: 0.35rem;
+  font-size: 0.72rem;
+  color: oklch(0.60 0.20 255);
+}
+
+/* Progress ring */
+.progress-ring-svg {
+  transform: rotate(-90deg);
+}
+
+/* Stagger delays */
+.stagger-1 { transition-delay: 0.05s; }
+.stagger-2 { transition-delay: 0.10s; }
+.stagger-3 { transition-delay: 0.15s; }
+.stagger-4 { transition-delay: 0.20s; }
+.stagger-5 { transition-delay: 0.25s; }
+.stagger-6 { transition-delay: 0.30s; }
+
+/* ─── HERO PARTICLE DOTS ─── */
+@keyframes dots-drift {
+  0%   { background-position: 0 0; }
+  100% { background-position: 40px 40px; }
+}
+
+.hero-dots {
+  background-image: radial-gradient(
+    circle,
+    oklch(0.60 0.20 255 / 0.12) 1px,
+    transparent 1px
+  );
+  background-size: 32px 32px;
+  animation: dots-drift 20s linear infinite;
+}
+
+/* ─── HERO BANNER REEL ─── */
+@keyframes banner-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.banner-reel-track {
+  display: flex;
+  width: max-content;
+  animation: banner-scroll 30s linear infinite;
+  will-change: transform;
+}
+
+.banner-reel-track:hover {
+  animation-play-state: paused;
+}
+
+/* ─── HERO STAT PILLS ─── */
+.stat-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.9rem 0.45rem 0.6rem;
+  border-radius: 999px;
+  border-width: 1px;
+  border-style: solid;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat-pill:hover {
+  transform: translateY(-2px);
+}
+
+/* ─── NAVBAR TOP GRADIENT LINE ─── */
+.nav-top-border::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    oklch(0.60 0.20 255) 0%,
+    oklch(0.78 0.16 70) 50%,
+    oklch(0.60 0.20 255) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 3s linear infinite;
+}
+
+/* ─── WHY CHOOSE PICL — GLOW RING ─── */
+@keyframes spin-ring {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.glow-ring-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.glow-ring-wrapper::before {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  border-top-color: oklch(0.60 0.20 255 / 0.7);
+  border-right-color: oklch(0.78 0.16 70 / 0.4);
+  animation: spin-ring 3s linear infinite;
+}
+
+.glow-ring-wrapper::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: radial-gradient(circle, oklch(0.60 0.20 255 / 0.08) 0%, transparent 70%);
+}
+
+/* ─── SERVICE CARD GLOW SWEEP ─── */
+@keyframes glow-sweep {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.service-card-sweep {
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card-sweep::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    105deg,
+    transparent 0%,
+    oklch(0.60 0.20 255 / 0.06) 40%,
+    oklch(0.78 0.16 70 / 0.08) 50%,
+    oklch(0.60 0.20 255 / 0.06) 60%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.service-card-sweep:hover::after {
+  opacity: 1;
+  animation: glow-sweep 1s ease-in-out;
+}
+
+/* ─── CLIENT FILTER TABS ─── */
+.client-tab {
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  font-family: "General Sans", system-ui, sans-serif;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border: 1px solid oklch(0.30 0.03 255 / 0.4);
+  color: oklch(0.60 0.02 255);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.client-tab:hover {
+  border-color: oklch(0.60 0.20 255 / 0.5);
+  color: oklch(0.96 0.01 240);
+}
+
+.client-tab.active {
+  background: oklch(0.60 0.20 255 / 0.12);
+  border-color: oklch(0.60 0.20 255 / 0.6);
+  color: oklch(0.60 0.20 255);
+  box-shadow: 0 0 12px oklch(0.60 0.20 255 / 0.2);
+}
+
+/* ─── BRAND LOGO CARD HOVER ─── */
+.brand-logo-card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.brand-logo-card:hover {
+  transform: scale(1.05);
+  border-color: oklch(0.60 0.20 255 / 0.5) !important;
+  box-shadow: 0 0 18px oklch(0.60 0.20 255 / 0.2);
+}
+
+/* ─── WHATSAPP FLOAT ─── */
+@keyframes wa-pulse {
+  0%   { box-shadow: 0 0 0 0 oklch(0.65 0.25 145 / 0.6); }
+  70%  { box-shadow: 0 0 0 12px oklch(0.65 0.25 145 / 0); }
+  100% { box-shadow: 0 0 0 0 oklch(0.65 0.25 145 / 0); }
+}
+
+.whatsapp-btn {
+  animation: wa-pulse 2s ease-in-out infinite;
+}
+
+/* ─── TRUST SEAL STRIP ─── */
+.trust-seal {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  border: 1px solid oklch(0.35 0.04 255 / 0.45);
+  background: oklch(0.18 0.025 255 / 0.4);
+  backdrop-filter: blur(8px);
+  white-space: nowrap;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.trust-seal:hover {
+  border-color: oklch(0.78 0.16 70 / 0.6);
+  box-shadow: 0 0 14px oklch(0.78 0.16 70 / 0.15);
+}
